@@ -42,6 +42,7 @@ export interface Database {
           low_stock_threshold?: number;
           created_at?: string;
         };
+        Relationships: [];
       };
       products: {
         Row: {
@@ -86,6 +87,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       sales: {
         Row: {
@@ -112,6 +114,7 @@ export interface Database {
           total?: number;
           created_at?: string;
         };
+        Relationships: [];
       };
       sale_items: {
         Row: {
@@ -141,6 +144,7 @@ export interface Database {
           unit_price?: number;
           subtotal?: number;
         };
+        Relationships: [];
       };
     };
     Views: Record<string, never>;
