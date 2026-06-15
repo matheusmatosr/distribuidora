@@ -1,0 +1,10 @@
+# Configuração do projeto Supabase para uso com a CLI (supabase link / db push / functions deploy).
+# Veja: https://supabase.com/docs/guides/cli/config
+
+project_id = "stockbebidas"
+
+[functions.low-stock-alert]
+verify_jwt = false
+
+[functions.export-report]
+verify_jwt = true
