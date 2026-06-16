@@ -1,6 +1,8 @@
 // Tipos do banco de dados (espelham as migrações em supabase/migrations).
 // Mantenha este arquivo em sincronia caso o schema seja alterado.
 
+export type UserStatus = "pending" | "approved" | "rejected";
+
 export type ProductCategory =
   | "cerveja"
   | "refrigerante"
@@ -29,18 +31,24 @@ export interface Database {
           distributor_name: string;
           low_stock_threshold: number;
           created_at: string;
+          status: UserStatus;
+          is_admin: boolean;
         };
         Insert: {
           id: string;
           distributor_name?: string;
           low_stock_threshold?: number;
           created_at?: string;
+          status?: UserStatus;
+          is_admin?: boolean;
         };
         Update: {
           id?: string;
           distributor_name?: string;
           low_stock_threshold?: number;
           created_at?: string;
+          status?: UserStatus;
+          is_admin?: boolean;
         };
         Relationships: [];
       };

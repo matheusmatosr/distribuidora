@@ -24,15 +24,32 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
 
-    if (error) {
+    if (signInError) {
       setError("E-mail ou senha inválidos.");
       setLoading(false);
       return;
     }
 
-    router.replace("/dashboard");
+    // Verifica status do usuário para direcionar corretamente
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("status, is_admin")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.is_admin || profile?.status === "approved") {
+        router.replace("/dashboard");
+      } else {
+        router.replace("/pending");
+      }
+    } else {
+      router.replace("/dashboard");
+    }
+
     router.refresh();
   }
 
